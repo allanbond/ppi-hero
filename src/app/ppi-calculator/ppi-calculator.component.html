@@ -1,0 +1,57 @@
+<form [formGroup]="ppiForm">
+  <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+      <span class="mat-body-2">Screen Size (diagonal)</span>
+      <mat-slider
+        min="3"
+        max="50"
+        thumbLabel
+        formControlName="diagonalSize"
+      ></mat-slider>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+      <span class="mat-body-2">Resolution</span>
+      <mat-button-toggle-group
+        #group="matButtonToggleGroup"
+        (change)="onPresetResolutionChange($event)"
+      >
+        <ng-container *ngFor="let preset of (presetResolutions | keyvalue)">
+          <mat-button-toggle [value]="preset.key">
+            {{ preset.value.label }}
+          </mat-button-toggle>
+        </ng-container>
+        <mat-button-toggle value="other">
+          Other
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <ng-container *ngIf="group.value === 'other'">
+      <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+        <span>Enter a resolution</span>
+        <div fxLayout="row" fxLayoutGap="10px">
+          <mat-form-field appearance="outline">
+            <mat-label>Horizontal</mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="horizontalResolution"
+            />
+            <span matSuffix>px</span>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Vertical</mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="verticalResolution"
+            />
+            <span matSuffix>px</span>
+          </mat-form-field>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</form>
+
+PPI: {{ ppi }} Dot Pitch: {{ 1 / ppi }}
