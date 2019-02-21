@@ -14,9 +14,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { PpiCalculatorComponent } from "./ppi-calculator/ppi-calculator.component";
+import { ScreenComponent } from './screen/screen.component';
 
 @NgModule({
-  declarations: [AppComponent, PpiCalculatorComponent],
+  declarations: [AppComponent, PpiCalculatorComponent, ScreenComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

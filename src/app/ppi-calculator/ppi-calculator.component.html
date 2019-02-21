@@ -1,3 +1,4 @@
+<app-screen [screen]="screen"></app-screen>
 <form [formGroup]="ppiForm">
   <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
     <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
@@ -54,4 +55,7 @@
   </div>
 </form>
 
-PPI: {{ ppi }} Dot Pitch: {{ 1 / ppi }}
+<div fxLayout="column" fxLayoutGap="20px">
+  <span class="mat-display-2">PPI {{ screen?.ppi }}</span>
+  <span class="mat-display-1">Dot Pitch {{ screen?.dotPitch }}</span>
+</div>

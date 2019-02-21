@@ -6,7 +6,6 @@ import {
   PresetResolutions,
   PresetResolution
 } from "./shared/model";
-import { computePpi } from "./shared/ppi-utils";
 
 const presetResolutions: PresetResolutions = {
   _720p: {
@@ -30,6 +29,13 @@ const presetResolutions: PresetResolutions = {
       vPixels: 1440
     }
   },
+  _uwqhd: {
+    label: "Ultrawide QHD",
+    resolution: {
+      hPixels: 3440,
+      vPixels: 1440
+    }
+  },
   _4k: {
     label: "4k",
     resolution: {
@@ -48,13 +54,12 @@ export class PpiService {
   computePpi(
     diagonalSize: number,
     resolution: PresetResolutionsKeys | Resolution
-  ): number {
-    const screen: ScreenInfo = {
-      diagonalSize: diagonalSize,
-      resolution: {
-        hPixels: 0,
-        vPixels: 0
-      }
+  ): ScreenInfo {
+    const screen: ScreenInfo = new ScreenInfo();
+    screen.diagonalSize = diagonalSize;
+    screen.resolution = {
+      hPixels: 0,
+      vPixels: 0
     };
 
     if (typeof resolution === "string") {
@@ -64,7 +69,7 @@ export class PpiService {
       screen.resolution.vPixels = (resolution as Resolution).vPixels;
     }
 
-    return computePpi(screen);
+    return screen;
   }
 
   getPresetResolutions(): PresetResolutions {

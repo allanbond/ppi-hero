@@ -3,7 +3,11 @@ import { FormControl, FormGroup } from "@angular/forms";
 import * as PpiUtils from "../shared/ppi-utils";
 import { PpiService } from "../ppi.service";
 import { MatButtonToggleChange } from "@angular/material";
-import { PresetResolution, PresetResolutions } from "../shared/model";
+import {
+  PresetResolution,
+  PresetResolutions,
+  ScreenInfo
+} from "../shared/model";
 
 @Component({
   selector: "app-ppi-calculator",
@@ -17,7 +21,7 @@ export class PpiCalculatorComponent implements OnInit {
     horizontalResolution: new FormControl(),
     verticalResolution: new FormControl()
   });
-  ppi: number;
+  screen: ScreenInfo;
   presetResolutions: PresetResolutions;
 
   constructor(private _ppiService: PpiService) {}
@@ -44,7 +48,7 @@ export class PpiCalculatorComponent implements OnInit {
               ? { hPixels: horizontalResolution, vPixels: verticalResolution }
               : presetResolution;
 
-          this.ppi = this._ppiService.computePpi(
+          this.screen = this._ppiService.computePpi(
             Number.parseFloat(diagonalSize),
             resolution
           );
